@@ -1,0 +1,74 @@
+class Planeta
+{
+	String Nome;
+	String Sistema;
+	String Cor;
+	int Diametro;
+	public Planeta(String Nome,String Sistema,String Cor,int Diametro)
+	{
+		this.Nome=Nome;
+		this.Sistema=Sistema;
+		this.Cor=Cor;
+		this.Diametro=Diametro;
+	}
+}
+class Ser
+{
+	String Nome;
+	String Sexo;
+	String Especie;
+	Planeta Natal;
+	public Ser(String Nome,String sexo,String Especie,Planeta Natal)
+	{
+		this.Nome=Nome;
+		this.Sexo=sexo;
+		this.Especie=Especie;
+		this.Natal=Natal;
+	}
+}
+class RegimePolitico
+{
+	String Nome;
+	Ser Chefe;
+	Planeta Capital;
+	Planeta Planetas[];
+	String DataInicio;
+	String DataFim;
+	public RegimePolitico(String Nome,Ser Chefe,String DataInicio,String DataFim,Planeta Capital)
+	{
+		this.Nome=Nome;
+		this.Chefe=Chefe;
+		this.DataInicio=DataInicio;
+		this.DataFim=DataFim;
+		this.Capital=Capital;
+		Planetas[0]=Capital;
+	}
+	public void AddPlaneta(Planeta Novo)
+	{
+		int i=0;
+		while(Planetas[i]!=null)
+		{
+			i++;
+		}
+		Planetas[i]=Novo;
+	}
+}
+abstract class Academia
+{
+	String Nome;
+	Planeta Local;
+}
+class Cla
+{
+	String Nome;
+	Mestre Instrutor;
+	public Cla(String Nome,Mestre Instrutor)
+	{
+		this.Nome=Nome;
+		this.Instrutor=Instrutor;
+	}
+}
+public class Exercicio1 
+{
+	public static void main(String[] args){
+}}
