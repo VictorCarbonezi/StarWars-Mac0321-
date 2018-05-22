@@ -54,6 +54,7 @@ class Padawan extends Youngling
 		super(Nome,sexo,Especie,Natal);
 		Trança=true;
 		this.Sabre=Sabre;
+		PegouCristais=true;
 	}
 }
 class Cavaleiro extends Padawan
@@ -62,6 +63,7 @@ class Cavaleiro extends Padawan
 	{
 		super(Nome,sexo,Especie,Natal,Sabre);
 		Trança=false;
+		SabeFazerSabre=true;
 	}
 }
 class Mestre extends Cavaleiro
@@ -124,6 +126,7 @@ class LordeSith extends Aprendiz
 	public LordeSith(String Nome,String sexo,String Especie,Planeta Natal,String NovoNome,int Poder,int Tamanho)
 	{
 		super(Nome,sexo,Especie,Natal,NovoNome);
+		SabeFazerSabre=true;
 		if(Poder==0)
 		{
 			Imortal=true;
