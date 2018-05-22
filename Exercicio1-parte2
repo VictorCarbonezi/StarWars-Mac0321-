@@ -1,0 +1,167 @@
+public class AcademiaJedi extends Academia 
+{
+	Jedi Conselho[];
+	public AcademiaJedi(Jedi Conselho[])
+	{
+		this.Conselho=Conselho;
+	}
+}
+class AcademiaSith extends Academia
+{
+	Sith Conselho[];
+	public AcademiaSith(Sith Conselho[])
+	{
+		this.Conselho=Conselho;
+	}
+}
+class Sabre
+{
+	String Cor;
+	String Forma;
+	public Sabre(String Cor, String Forma)
+	{
+		this.Cor=Cor;
+		this.Forma=Forma;
+	}
+}
+abstract class Jedi extends Ser
+{
+	double PercentualPaz;
+	boolean telepatia;
+	boolean telecinese;
+	boolean persuasao;
+	public Jedi(String Nome,String sexo,String Especie,Planeta Natal)
+	{
+		super(Nome,sexo,Especie,Natal);
+	}
+}
+class Youngling extends Jedi
+{
+	boolean PegouCristais;
+	Cla Cla;
+	public Youngling(String Nome,String sexo,String Especie,Planeta Natal)
+	{
+		super(Nome,sexo,Especie,Natal);
+	}
+}
+class Padawan extends Youngling
+{
+	boolean Trança;
+	boolean SabeFazerSabre;
+	Sabre Sabre;
+	public Padawan(String Nome,String sexo,String Especie,Planeta Natal,Sabre Sabre)
+	{
+		super(Nome,sexo,Especie,Natal);
+		Trança=true;
+		this.Sabre=Sabre;
+	}
+}
+class Cavaleiro extends Padawan
+{
+	public Cavaleiro(String Nome,String sexo,String Especie,Planeta Natal,Sabre Sabre)
+	{
+		super(Nome,sexo,Especie,Natal,Sabre);
+		Trança=false;
+	}
+}
+class Mestre extends Cavaleiro
+{
+	boolean Imortal;
+	boolean CampoVidencia;
+	int TamanhoCampo;
+	public Mestre(String Nome,String sexo,String Especie,Planeta Natal,Sabre Sabre,int Poder, int Tamanho)
+	{//Poder decide qual ou quais poderes o mestre possui
+		super(Nome,sexo,Especie,Natal,Sabre);
+		Trança=false;
+		if(Poder==0)
+		{
+			Imortal=true;
+			CampoVidencia=false;
+			TamanhoCampo=0;
+		}
+		else if(Poder==1)
+		{
+			Imortal=false;
+			CampoVidencia=true;
+			TamanhoCampo=Tamanho;
+		}
+		else
+		{
+			Imortal=true;
+			CampoVidencia=true;
+			TamanhoCampo=Tamanho;
+		}
+	}
+}
+abstract class Sith extends Ser
+{
+	double PercentualRaiva;
+	String NovoNome;
+	boolean telepatia;
+	boolean telecinese;
+	boolean persuasao;
+	public Sith(String Nome,String sexo,String Especie,Planeta Natal,String NovoNome)
+	{
+		super(Nome,sexo,Especie,Natal);
+		this.NovoNome=NovoNome;
+	}
+}
+class Aprendiz extends Sith
+{
+	LordeSith Mestre;
+	boolean SabeFazerSabre;
+	public Aprendiz(String Nome,String sexo,String Especie,Planeta Natal,String NovoNome)
+	{
+		super(Nome,sexo,Especie,Natal,NovoNome);
+	}
+}
+class LordeSith extends Aprendiz
+{
+	Sabre Sabre;
+	boolean Imortal;
+	boolean CampoVidencia;
+	int TamanhoCampo;
+	public LordeSith(String Nome,String sexo,String Especie,Planeta Natal,String NovoNome,int Poder,int Tamanho)
+	{
+		super(Nome,sexo,Especie,Natal,NovoNome);
+		if(Poder==0)
+		{
+			Imortal=true;
+			CampoVidencia=false;
+			TamanhoCampo=0;
+		}
+		else if(Poder==1)
+		{
+			Imortal=false;
+			CampoVidencia=true;
+			TamanhoCampo=Tamanho;
+		}
+		else
+		{
+			Imortal=true;
+			CampoVidencia=true;
+			TamanhoCampo=Tamanho;
+		}
+	}
+}
+class Missao
+{
+	Ser Elaborador;
+	Planeta Planetas[];
+	Ser Executor;
+	String Objetivo;
+	boolean Sucesso;
+	Ser Envolvidos[];
+	public Missao(Ser Elaborador,Planeta Planetas[],Ser Executor,String Objetivo,Ser Envolvidos[])
+	{
+		this.Elaborador=Elaborador;
+		this.Planetas=Planetas;
+		this.Executor=Executor;
+		this.Objetivo=Objetivo;
+		this.Envolvidos=Envolvidos;
+	}
+	public void Vitoria(boolean sucesso)
+	{
+		Sucesso=sucesso;
+	}
+}
