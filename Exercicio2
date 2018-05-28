@@ -1,0 +1,208 @@
+import java.util.Random;
+class AtaqueJedi//A batalha está levemente a favor do Sith
+{
+	Mestre Jedi;
+	public AtaqueJedi(Mestre Jedi)
+	{
+		this.Jedi=Jedi;
+	}
+	public int Ataque(int a)
+	{
+		if(a==0)
+		{
+			System.out.println("Mestre Jedi "+Jedi.Nome+" usou ataque de sabre");
+			return 8+Jedi.DominioSabre;
+		}
+		else if(a==1)
+		{
+			System.out.println("Mestre Jedi "+Jedi.Nome+" usou ataque de sabre rápido");
+			return 6+Jedi.DominioSabre;
+		}
+		else if(a==2)
+		{
+			System.out.println("Mestre Jedi "+Jedi.Nome+" usou jogar pedras");
+			return 4+Jedi.DominioForça;
+		}
+		else
+		{
+			System.out.println("Mestre Jedi "+Jedi.Nome+" usou empurrão");
+			return 2+Jedi.DominioForça;
+		}
+	}
+	public int Prioridade(int a)
+	{
+		if(a==0)
+		{
+			return 2;
+		}
+		else if(a==1)
+		{
+			return 4;
+		}
+		else if(a==2)
+		{
+			return 7;
+		}
+		else return 9;
+	}
+}
+class AtaqueSith
+{
+	LordeSith Sith;
+	public AtaqueSith(LordeSith Sith)
+	{
+		this.Sith=Sith;
+	}
+	public int Ataque(int a)
+	{
+		if(a==0)
+		{
+			System.out.println("Lorde Sith "+Sith.Nome+" usou ataque de sabre");
+			return 8+Sith.DominioSabre;
+		}
+		else if(a==1)
+		{
+			System.out.println("Lorde Sith "+Sith.Nome+" usou corte diagonal");
+			return 5+Sith.DominioSabre;
+		}
+		else if(a==2)
+		{
+			System.out.println("Lorde Sith "+Sith.Nome+" usou enforcar");
+			return 4+Sith.DominioForça;
+		}
+		else
+		{
+			System.out.println("Lorde Sith "+Sith.Nome+" usou empurrão");
+			return 2+Sith.DominioForça;
+		}
+	}
+	public int Prioridade(int a)
+	{
+		if(a==0)
+		{
+			return 5;
+		}
+		else if(a==1)
+		{
+			return 3;
+		}
+		else if(a==2)
+		{
+			return 10;
+		}
+		else return 8;
+	}
+}
+class Batalha
+{
+	Random rd = new Random();
+	Mestre Jedi;
+	LordeSith Sith;
+	int DanoA;//Guarda o dano causado pelo Jedi
+	int DanoB;//Guarda o dano causado pelo Sith
+	int a;//a e b guardam valores de dois numeros aleatorios
+	int b;
+	int Prioridade;
+	public Batalha(Mestre Jedi,LordeSith Sith)
+	{
+		this.Jedi=Jedi;
+		this.Sith=Sith;
+	}
+	public void Luta()
+	{
+		System.out.println("Inicia a batalha entre o Mestre Jedi "+Jedi.Nome+" e o Lorde Sith "+Sith.Nome);
+		AtaqueJedi A1 = new AtaqueJedi(Jedi);
+		AtaqueSith A2 = new AtaqueSith(Sith);
+		do
+		{
+			a=rd.nextInt(5);
+			b=rd.nextInt(5);
+			if(a==4)
+			{
+				Prioridade=11;
+			}
+			else
+			{
+				Prioridade=A1.Prioridade(a);
+			}
+			if(b==4)
+			{
+				Prioridade-=11;
+			}
+			else
+			{
+				Prioridade-=A2.Prioridade(b);
+			}
+			if(Prioridade>0)//Jedi ataca primeiro
+			{
+				if(a==4&&b<2)
+				{
+					DanoB=A2.Ataque(b);
+					System.out.println("O Jedi se esquivou do ataque do Sith");
+				}
+				else if(a==4&&b>=2)
+				{
+					DanoB=A2.Ataque(b);
+					System.out.println("O Jedi falhou em se esquivar e recebeu "+DanoB+" de dano");
+					Jedi.Vida-=DanoB;
+				}
+				else
+				{
+					DanoA=A1.Ataque(a);
+					Sith.Vida-=DanoA;
+					System.out.println("O Lorde Sith recebeu "+DanoA+" de dano");
+					if(Sith.Vida<=0) break;
+					DanoB=A2.Ataque(b);
+					Jedi.Vida-=DanoB;
+					System.out.println("O Jedi recebeu "+DanoB+" de dano");
+				}
+			}
+			else if(Prioridade<0)//Sith ataca primeiro
+			{
+				if(b==4&&a<2)
+				{
+					DanoA=A1.Ataque(a);
+					System.out.println("O Sith se esquivou do ataque do Jedi");
+				}
+				else if(b==4&&a>=2)
+				{
+					DanoA=A1.Ataque(a);
+					System.out.println("O Sith falhou em se esquivar e recebeu "+DanoA+" de dano");
+					Sith.Vida-=DanoA;
+				}
+				else
+				{
+					DanoB=A2.Ataque(b);
+					Jedi.Vida-=DanoB;
+					System.out.println("O Jedi recebeu "+DanoB+" de dano");
+					if(Jedi.Vida<=0) break;
+					DanoA=A1.Ataque(a);
+					Sith.Vida-=DanoA;
+					System.out.println("O Lorde Sith recebeu "+DanoA+" de dano");
+				}
+			}
+			else
+			{
+				System.out.println("Ambos tentaram se esquivar");
+			}
+		}while(Jedi.Vida>0&&Sith.Vida>0);
+		if(Jedi.Vida<=0)
+			System.out.println("O Lorde Sith "+Sith.Nome+" eliminou a escória Jedi");
+		if(Sith.Vida<=0)
+			System.out.println("O Jedi "+Jedi.Nome+" eliminou o lado negro da força");
+	}
+}
+
+public class Exercicio2 {
+	public static void main(String[] args)
+	{
+		Planeta Naboo=new Planeta("Naboo","Naboo","Verde",100000);
+		Planeta Char=new Planeta("Char","Char","Vermelho",100000);
+		Sabre SabreYoda=new Sabre("Verde","Espada");
+		Sabre SabrePalpatine=new Sabre("Vermelho","Espada");
+		Mestre Yoda=new Mestre("Yoda","Macho","Sapo",Naboo,SabreYoda,2,10000,5,5,30);
+		LordeSith Palpatine=new LordeSith("Palpatine","Macho","Humano",Char,"Darth Sidious",2,10000,5,5,30,SabrePalpatine);
+		Batalha Batalha=new Batalha(Yoda,Palpatine);
+		Batalha.Luta();
+	}
+}
