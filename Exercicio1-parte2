@@ -1,3 +1,4 @@
+
 public class AcademiaJedi extends Academia 
 {
 	Jedi Conselho[];
@@ -71,9 +72,16 @@ class Mestre extends Cavaleiro
 	boolean Imortal;
 	boolean CampoVidencia;
 	int TamanhoCampo;
-	public Mestre(String Nome,String sexo,String Especie,Planeta Natal,Sabre Sabre,int Poder, int Tamanho)
+	int DominioForça;
+	int DominioSabre;
+	int Vida;
+	public Mestre(String Nome,String sexo,String Especie,Planeta Natal,Sabre Sabre,int Poder, int Tamanho,
+			int DominioForça,int DominioSabre,int Vida)
 	{//Poder decide qual ou quais poderes o mestre possui
 		super(Nome,sexo,Especie,Natal,Sabre);
+		this.DominioForça=DominioForça;
+		this.DominioSabre=DominioSabre;
+		this.Vida=Vida;
 		Trança=false;
 		if(Poder==0)
 		{
@@ -123,10 +131,18 @@ class LordeSith extends Aprendiz
 	boolean Imortal;
 	boolean CampoVidencia;
 	int TamanhoCampo;
-	public LordeSith(String Nome,String sexo,String Especie,Planeta Natal,String NovoNome,int Poder,int Tamanho)
+	int DominioForça;
+	int DominioSabre;
+	int Vida;
+	public LordeSith(String Nome,String sexo,String Especie,Planeta Natal,String NovoNome,int Poder,int Tamanho
+			,int DominioForça,int DominioSabre,int vida,Sabre Sabre)
 	{
 		super(Nome,sexo,Especie,Natal,NovoNome);
 		SabeFazerSabre=true;
+		this.Sabre=Sabre;
+		this.DominioForça=DominioForça;
+		this.DominioSabre=DominioSabre;
+		this.Vida=vida;
 		if(Poder==0)
 		{
 			Imortal=true;
